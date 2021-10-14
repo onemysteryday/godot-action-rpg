@@ -55,7 +55,7 @@ func _physics_process(delta):
 				#global_position = lerp(global_position, player.global_position, delta)
 				update_velocity(player.global_position, delta)
 		
-	velocity += $SoftCollision.get_push_vector() * delta * 400		
+	velocity += $SoftCollision.get_push_vector() * delta * 400
 	velocity = move_and_slide(velocity)
 
 func _on_HurtBox_area_entered(area):
@@ -77,11 +77,11 @@ func _on_PlayerDetectionZone_player_detected():
 	state = CHASE
 
 func _on_PlayerDetectionZone_player_escaped():
-	state = IDLE
+	state = WANDER
 	
 func update_velocity(position, delta):
-	var direction = global_position.direction_to(position)
-	velocity = velocity.move_toward(direction * 50, speed * delta)
+	var direction = global_position.direction_to(position) * 50
+	velocity = velocity.move_toward(direction, speed * delta)
 	$AnimatedSprite.flip_h = direction.x < 0
 	
 func reset_wander_state():

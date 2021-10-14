@@ -78,7 +78,7 @@ collision_mask = 0
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 2
+max_health = 5
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
 visible = false

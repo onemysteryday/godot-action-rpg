@@ -1,9 +1,15 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Player/SwordHitBox.gd" type="Script" id=3]
 [ext_resource path="res://Shadows/MediumShadow.png" type="Texture" id=4]
+[ext_resource path="res://Music and Sounds/Swipe.wav" type="AudioStream" id=5]
+[ext_resource path="res://WhiteColor.shader" type="Shader" id=6]
+
+[sub_resource type="ShaderMaterial" id=49]
+shader = ExtResource( 6 )
+shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.81071
@@ -62,6 +68,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false, true ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "attack_left"
@@ -115,6 +135,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0.1 )
 }
 
 [sub_resource type="Animation" id=4]
@@ -170,6 +204,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false, true ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "attack_up"
@@ -223,6 +271,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0.1 )
 }
 
 [sub_resource type="Animation" id=6]
@@ -596,7 +658,7 @@ states/Roll/node = SubResource( 37 )
 states/Roll/position = Vector2( 188.357, -29.0925 )
 transitions = [ "Idle", "Move", SubResource( 38 ), "Move", "Idle", SubResource( 39 ), "Idle", "Attack", SubResource( 40 ), "Attack", "Idle", SubResource( 41 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -158.348, -33.6325 )
+graph_offset = Vector2( -55.3205, -15.7 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
@@ -607,6 +669,39 @@ height = 12.0
 [sub_resource type="CapsuleShape2D" id=47]
 radius = 5.46902
 height = 2.37138
+
+[sub_resource type="Animation" id=50]
+resource_name = "start"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -620,10 +715,11 @@ position = Vector2( 0, 2.21704 )
 texture = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 49 )
 position = Vector2( 0.464586, -9.14328 )
 texture = ExtResource( 1 )
 hframes = 60
-frame = 18
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.00267029, 0.0300779 )
@@ -659,7 +755,7 @@ parameters/Roll/blend_position = Vector2( -0.418868, -0.378763 )
 
 [node name="PivotSword" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = -1.5708
+rotation = 1.5708
 
 [node name="SwordHitBox" type="Area2D" parent="PivotSword"]
 position = Vector2( 15, 0 )
@@ -680,6 +776,13 @@ collision_mask = 0
 shape = SubResource( 47 )
 
 [node name="HurtTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/start = SubResource( 50 )
+anims/stop = SubResource( 51 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_exited" from="HurtBox" to="." method="_on_HurtBox_area_exited"]
