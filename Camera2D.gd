@@ -26,11 +26,17 @@ var dragging := false
 
 # We store a reference to the scene's tween node.
 onready var tween: Tween = $Tween
+onready var topLeft = $Limits/TopLeft
+onready var bottomRight = $Limits/BottomRight
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#_zoom_level = zoom.x
-	pass
+	limit_left = topLeft.position.x
+	limit_right = bottomRight.position.x
+	
+	limit_top = topLeft.position.y
+	limit_bottom = bottomRight.position.y
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
