@@ -747,6 +747,7 @@ parameters/Move/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( -0.418868, -0.378763 )
 
 [node name="PivotSword" type="Position2D" parent="."]
+visible = false
 position = Vector2( 0, -4 )
 rotation = 1.5708
 

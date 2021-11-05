@@ -51,6 +51,7 @@ func _unhandled_input(event):
 	if player == null or camera2d.dragging:
 		return
 		
+		
 	var new_path := nav2d.get_simple_path(player.global_position, get_local_mouse_position())
 	line2d.points = new_path
 	player.path = new_path
